@@ -3,13 +3,18 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  USUARIO, PASSWORD, DB_HOST,PORT
+  USUARIO, PASSWORD, DB_HOST,DB_PORT,DB_NAME
 } = process.env;
 
 
-const sequelize = new Sequelize(`postgres://${USUARIO}:${PASSWORD}@${DB_HOST}:${PORT}/videogames`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize( {
+  database: "videogames", // Nombre de la base de datos
+  username: "postgres",  // Nombre de usuario de la base de datos
+  password: "mario123",  // Contraseña de la base de datos
+  host: "localhost",     // Host de la base de datos
+  dialect: "postgres",   // Tipo de base de datos (PostgreSQL en este caso)
+  port: 5433,            // Puerto de la base de datos
+  logging: false,        
 });
 const basename = path.basename(__filename);
 
