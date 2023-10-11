@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require("fs");
 
 require("dotenv").config();
-const { API_KEY } = process.env;
+const  API_KEY  = "fcbc119400684aa5aa9a62a3d0e5c9f0";
 
 async function getVideogames() {
   try {
