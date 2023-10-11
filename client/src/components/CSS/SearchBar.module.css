@@ -1,0 +1,31 @@
+.searchBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button{
+  border-radius: 50px;
+  border: 1px solid transparent;
+  padding: 0.24em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-image: linear-gradient(25deg, rgba(4, 8, 254, 0.548), rgba(2, 2, 110, 0.487), #0225c4c4 );
+  cursor: pointer;
+  margin-left: 58px;
+  margin-right: 58px;
+  text-decoration: none;
+  color: #e1e1e1;
+  
+}
+.button:hover {
+  border-color: #ffffff;
+}
+
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.input{
+    border-radius: 100px;
+    background-color: #dcdada;
+}

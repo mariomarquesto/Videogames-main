@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import LandingPage from "./components/LandingPage"
+import Detail from "./components/Detail"
+import Cards from "./components/Cards"
+import CreateVideogameForm from "./components/CreateVideogameForm"
+import NavBar from "./components/NavBar"
+import About from "./components/About"
+import RefreshRedirect from './components/RefreshRedirect';
 
-function App() {
-  const [count, setCount] = useState(0)
+import {Routes, Route, useLocation, useNavigate } from "react-router-dom"
+
+import { useEffect } from "react"
+import { useDispatch } from 'react-redux';
+import { addVideogames } from './redux/actions';
+import axios from "axios"
+
+export default function App() {
+  
+  const location = useLocation();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  function goingHome() {
+    navigate('/home')
+  }
+
+  useEffect(() => {
+    dispatch(addVideogames()) 
+  }, [])
+
+  useEffect(() => {
+    (async function inEffect() {
+      try {
+        await axios.get('http://localhost:3001/genres')
+      } catch (error) {
+        console.log(error)
+      }
+    })()
+  }, [])
+  
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      {(location.pathname !== "/") && <NavBar />}
+      <RefreshRedirect />
+      <Routes>
+        <Route path="/" element={<LandingPage goingHome={goingHome} />}/>
+        <Route path="/home" element={<Cards  />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/create" element={<CreateVideogameForm />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+
