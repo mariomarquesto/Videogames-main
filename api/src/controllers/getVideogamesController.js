@@ -1,5 +1,5 @@
 const { getVideogames } = require("../utils/endpoints");
-const { Videogame, Genres } = require("../db");
+const { Videogame } = require("../db");
 
 async function getVideogamesController(req, res) {
   try {
@@ -15,11 +15,11 @@ async function getVideogamesController(req, res) {
     });   
     
     if (videogamesWithGenres) {
-      videogamesWithGenres = videogamesWithGenres.map(function (videogame) {
-        const { Genres, ...remainingDataValues } = videogame.dataValues;
+      videogamesWithGenres = videogamesWithGenres.map(function (videogames) {
+        const { Genres, ...remainingDataValues } = videogames.dataValues;
         return {
           ...remainingDataValues,
-          genres: videogame.dataValues.Genres.map((genre) => genre.nombre),
+          genres: videogames.dataValues.Genres.map((genre) => genre.nombre),
         };
       });
       

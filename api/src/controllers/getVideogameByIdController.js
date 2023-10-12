@@ -1,5 +1,5 @@
 const { getVideogameById } = require("../utils/endpoints");
-const { Videogame, Genres } = require("../db");
+const { videogames, Genres } = require("../db");
 
 async function getVideogameByIdController(req, res) {
   try {
@@ -8,7 +8,7 @@ async function getVideogameByIdController(req, res) {
       return res.status(404).json({ error: "No Params Recived" });
     console.log(typeof idVideogame);
 
-    let busquedaenDB = await Videogame.findOne({
+    let busquedaenDB = await videogames.findOne({
       where: {
         id: idVideogame,
       },

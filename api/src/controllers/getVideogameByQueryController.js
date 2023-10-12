@@ -1,5 +1,5 @@
 const { searchVideogame } = require("../utils/endpoints");
-const { Videogame, Genres } = require("../db");
+const { videogames, Genres } = require("../db");
 
 async function getVideogameByQueryController(req, res) {
   try {
@@ -8,7 +8,7 @@ async function getVideogameByQueryController(req, res) {
     let arrayOfSearchGame = await searchVideogame(name);
     arrayOfSearchGame = arrayOfSearchGame.slice(0, 15);
 
-    const busquedaenDB = await Videogame.findOne({
+    const busquedaenDB = await videogames.findOne({
       where: {
         nombre: name,
       },

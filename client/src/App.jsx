@@ -7,6 +7,8 @@ import NavBar from "./components/NavBar"
 import About from "./components/About"
 import RefreshRedirect from './components/RefreshRedirect';
 
+import Card from './components/Card';
+
 import {Routes, Route, useLocation, useNavigate } from "react-router-dom"
 
 import { useEffect } from "react"
@@ -51,6 +53,7 @@ export default function App() {
         <Route path="/create" element={<CreateVideogameForm />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <Card />
     </div>
   );
 }

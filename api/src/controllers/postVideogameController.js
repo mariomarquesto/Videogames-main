@@ -1,5 +1,5 @@
 const e = require("express")
-const { Videogame, Genres } = require("../db")
+const { videogames, Genres } = require("../db")
 
 async function postVideogameController(req,res) {
     try {
@@ -19,18 +19,18 @@ async function postVideogameController(req,res) {
             rating,
         }
 
-        const siYaExiste = await Videogame.findOne({
+        const siYaExiste = await videogames.findOne({
             where:{
-                nombre: videogame.nombre
+                nombre: videogames.nombre
             }
         })
         
         if(siYaExiste) return res.status(404).json({error: 'El videojuego que intentas crear, ya existe.'})      
 
-        const gameCreated = await Videogame.create(videogame)
+        const gameCreated = await videogames.create(videogames)
         await gameCreated.addGenres(genresID)
 
-        return res.status(200).json({...videogame, genres: genresName})     
+        return res.status(200).json({...videogames, genres: genresName})     
     } catch (error) {
         console.log(error)
         return res.status(404).json({error: error})
